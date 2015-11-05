@@ -428,6 +428,10 @@ if ( ! class_exists( 'Airplane_Mode_Core' ) ) {
 			// pass our data to the action to allow a bypass
 			do_action( 'airplane_mode_http_args', $status, $args, $url );
 
+			if (!empty($args['_httpallow'])) {
+				return $status;
+			}
+
 			// disable the http requests only if enabled
 			return $this->enabled() ? new WP_Error( 'airplane_mode_enabled', __( 'Airplane Mode is enabled', 'airplane-mode' ) ) : $status;
 		}
